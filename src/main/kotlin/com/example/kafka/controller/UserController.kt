@@ -11,7 +11,7 @@ class UserController(
 ) {
     @PostMapping("/register")
     fun register(@RequestBody event: UserRegisteredEvent): String {
-        producer.send(event)
+        producer.sendWithHeader(event)
         return "User registered event sent!"
     }
 }
