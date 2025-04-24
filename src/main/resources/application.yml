@@ -4,11 +4,19 @@ server:
 spring:
   kafka:
     bootstrap-servers: 127.0.0.1:9094
+    listener:
+      ack-mode: record
+      retry:
+        enabled: true
+        max-attempts: 3
+        backoff:
+          delay: 1000  # 1초 간격 재시도
     consumer:
       group-id: user-group
       auto-offset-reset: earliest
       key-deserializer: org.apache.kafka.common.serialization.StringDeserializer
       value-deserializer: org.apache.kafka.common.serialization.StringDeserializer
     producer:
+      retries: 3
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
