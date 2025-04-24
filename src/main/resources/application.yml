@@ -36,3 +36,35 @@ spring:
       retries: 3
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+otel:
+  resource:
+    attributes:
+      service.name: kafka-demo-service
+  exporter:
+    otlp:
+      endpoint: http://localhost:4318
+      protocol: http/protobuf
+  tracing:
+    enabled: true
+
+management:
+  tracing:
+    sampling:
+      probability: 1.0
+    enabled: true
+
+  otlp:
+    tracing:
+      endpoint: http://localhost:4318/v1/traces  # OTLP HTTP 포트
+      export:
+        enabled: true
+
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+
+  endpoint:
+    health:
+      show-details: always
