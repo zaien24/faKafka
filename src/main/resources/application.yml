@@ -36,6 +36,12 @@ spring:
       retries: 3
       key-serializer: org.apache.kafka.common.serialization.StringSerializer
       value-serializer: org.apache.kafka.common.serialization.StringSerializer
+    streams:
+      application-id: kafka-streams-demo
+      bootstrap-servers: 127.0.0.1:9094
+      properties:
+        default.key.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
+        default.value.serde: org.apache.kafka.common.serialization.Serdes$StringSerde
 
 otel:
   resource:
@@ -68,3 +74,7 @@ management:
   endpoint:
     health:
       show-details: always
+
+logging:
+  level:
+    org.apache.kafka.streams: DEBUG
